@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Event Groups
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addEventGroup()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="4" offset-sm="4">
+        <ion-button href="/home">Refresh</ion-button>
+        <ion-list *ngIf="eventList">
+          <ion-item lines="none">
+            <ion-label>
+              <h2>Event Groups</h2>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="!eventList.eventsGroups?.length" lines="none">
+            <ion-label>
+              <p>You currently dont have any eventGroups</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngFor="let eventGroup of eventList.eventsGroups">
+            <ion-label [routerLink]="['/event-group', eventGroup.id]">
+              <h2> {{ eventGroup.title }}</h2>
+              <p> {{ eventGroup.events.length }}</p>
+            </ion-label>
+            <ion-button slot="end" (click)="activate(eventGroup)">Start</ion-button>
+          </ion-item>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

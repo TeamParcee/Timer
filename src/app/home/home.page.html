@@ -1,14 +1,38 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Timer
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/event-groups">
+        <ion-icon slot="icon-only" name="apps"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-grid padding-none>
+    <ion-row>
+      <ion-col padding-none size-sm="4" offset-sm="4">
+        <ion-card margin-none>
+          <ion-card-header>
+            <ion-card-subtitle>Active Event Group</ion-card-subtitle>
+            <ion-card-title>{{ activeEventGroup?.title }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-header *ngIf="currentEvent">
+            <ion-card-subtitle>Current Event</ion-card-subtitle>
+            <ion-card-title>{{ currentEvent?.title }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+        <ion-card-content>
+          <ion-label>
+            <h1>
+              {{ time }}
+            </h1>
+          </ion-label>
+        </ion-card-content>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

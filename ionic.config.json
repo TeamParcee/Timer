@@ -1,5 +1,7 @@
 {
   "name": "Timer",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
