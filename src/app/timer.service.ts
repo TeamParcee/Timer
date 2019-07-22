@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as Timer from 'easytimer';
+import { Observable } from 'rxjs';
+import { ComponentService } from './component.service';
+import { Event } from './event';
 
 
 @Injectable({
@@ -7,36 +10,74 @@ import * as Timer from 'easytimer';
 })
 export class TimerService {
 
-  constructor() {
-    this.timer = new Timer();
+  constructor(
+    private componentService: ComponentService,
+  ) {
 
   }
 
 
 
 
-  private timer;
+  timer = new Timer();
 
 
 
 
   private startTime;
   private endTime;
+  private timerRunning;
+  private previousTime;
   currentTime;
 
 
 
-  startCountDownTimer(duration: number) {
-    this.timer.start({ countdown: true, startValues: { minutes: duration } });
-    this.getTime(this.timer)
+  startCountDownTimer(durations) {
+
+    
+    return new Promise((resolve) => {
+      if (!this.timerRunning) {
+        this.timer.start({ countdown: true, startValues: { minutes: duration } });
+        this.timerRunning = true;
+      }
+    })
+
+
 
   }
 
-  getTime(timer) {
-    timer.addEventListener('secondsUpdated', function (e) {
-      this.currentTime = this.timer.getTimeValues().toString();
-      console.log(this.currentTime);
-    });
+
+
+  waitForTimerToEnd(duration) {
+
+    this.timer.addEventListener('targetAchieved', this.timerEnded);
+
   }
+
+  timerEnded() {
+    this.timerRunning = false;
+  }
+
+  isTimerRunning() {
+    this.timer.addEventListener('secondsUpdated', () => {
+      if (this.timerRunning == true) {
+        return true
+      } else {
+        return false;
+      }
+    })
+  }
+
+  getTime() {
+    return new Observable((ob) => {
+      let timer = this.timer;
+      timer.addEventListener('secondsUpdated', function (e) {
+        this.currentTime = timer.getTimeValues().toString();
+        ob.next(this.currentTime);
+      });
+    })
+  }
+
+
 }
 

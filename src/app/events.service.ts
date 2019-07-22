@@ -21,8 +21,8 @@ export class EventsService {
 
   private event: EventGroup;
   activeEventGroup: EventGroup;
+  activeEvent: Event;
 
- 
 
   async createEventList() {
     let eventList: EventList = {
@@ -101,7 +101,7 @@ export class EventsService {
     })
   }
 
-   getEventGroups() {
+  getEventGroups() {
 
     // return new Observable((ob)=>{
     //   return ob.next()
@@ -110,7 +110,7 @@ export class EventsService {
 
 
     return new Observable((ob) => {
-       this.ls.get('eventList').then((eventList) => {
+      this.ls.get('eventList').then((eventList) => {
         if (!eventList) {
           this.checkEventList();
         }
@@ -136,9 +136,11 @@ export class EventsService {
   }
 
 
-  async startEvent(eventGroup: EventGroup){
+  async startEvent(eventGroup: EventGroup) {
     this.activeEventGroup = eventGroup;
-    this.timerService.startCountDownTimer(eventGroup.events[0].duration)
-    console.log(eventGroup.events[0].duration  + " duration")
+    this.activeEventGroup.events.forEach(async (event) => {
+      durations.push(event.duration)
+    })
+    this.timerService.startCountDownTimer(durations);
   }
 }

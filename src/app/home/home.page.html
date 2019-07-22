@@ -24,14 +24,15 @@
             <ion-card-subtitle>Current Event</ion-card-subtitle>
             <ion-card-title>{{ currentEvent?.title }}</ion-card-title>
           </ion-card-header>
+          <ion-card-content>
+            <ion-label>
+              <p>
+                Time: {{ time }}
+              </p>
+            </ion-label>
+          </ion-card-content>
         </ion-card>
-        <ion-card-content>
-          <ion-label>
-            <h1>
-              {{ time }}
-            </h1>
-          </ion-label>
-        </ion-card-content>
+
       </ion-col>
     </ion-row>
   </ion-grid>

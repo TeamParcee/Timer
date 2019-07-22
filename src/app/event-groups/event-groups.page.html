@@ -37,7 +37,7 @@
               <h2> {{ eventGroup.title }}</h2>
               <p> {{ eventGroup.events.length }}</p>
             </ion-label>
-            <ion-button slot="end" (click)="activate(eventGroup)">Start</ion-button>
+            <ion-button [disabled]="eventGroup.events.length == 0" slot="end" (click)="activate(eventGroup)">Start</ion-button>
           </ion-item>
 
         </ion-list>

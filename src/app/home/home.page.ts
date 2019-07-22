@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventsService } from '../events.service';
 import { EventGroup } from '../event-group';
 import { TimerService } from '../timer.service';
+import { from } from 'rxjs';
 
 
 @Component({
@@ -21,9 +22,12 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     this.activeEventGroup = (this.eventService.activeEventGroup) ? this.eventService.activeEventGroup : this.dummyEventGroup;
-    this.time = this.timeService.currentTime;
-}
-  activeEventGroup;
+    this.timeService.getTime().subscribe((result)=>{
+      this.time = result
+    })
+  }
+
+  activeEventGroup: EventGroup;
   currentEvent;
   time;
 
@@ -35,7 +39,7 @@ export class HomePage implements OnInit {
 
 
 
-  getCurrentEvent(){
-
-  }
+  // getCurrentEvent(){
+  //     this.activeEventGroup.events.
+  // }
 }
