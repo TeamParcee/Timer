@@ -138,9 +138,28 @@ export class EventsService {
 
   async startEvent(eventGroup: EventGroup) {
     this.activeEventGroup = eventGroup;
-    this.activeEventGroup.events.forEach(async (event) => {
-      durations.push(event.duration)
+    let sortedEvents = eventGroup.events.sort((a, b) => (a.order > b.order) ? 1 : -1)
+    let previousIndex;
+    let previousEvent;
+    let previousDuration;
+    let timeoutTime = 0;
+    sortedEvents.forEach(async (event) => {
+      
+      let index = this.activeEventGroup.events.findIndex(e => e.id === event.id);
+      previousIndex = (index == 0) ? 0 : index - 1;
+      previousEvent =  this.activeEventGroup.events[previousIndex];
+      previousDuration  = (index == 0) ? 0 :  this.activeEventGroup.events[previousIndex].duration;
+
+      timeoutTime = timeoutTime + previousDuration;
+     
+      setTimeout(()=>{
+        console.log(event);
+        this.activeEvent = event;
+        console.log(this.activeEvent);
+        this.timerService.startCountDownTimer(event);
+      }, timeoutTime * 62000)
+      
+
     })
-    this.timerService.startCountDownTimer(durations);
   }
 }

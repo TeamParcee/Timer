@@ -9,3 +9,12 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+
+ion-card, .alert-wrapper, ion-list, ion-item{
+    background: white !important;
+}
+
+*{
+    font-weight: bold;
+}

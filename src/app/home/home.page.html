@@ -5,32 +5,27 @@
     </ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/event-groups">
-        <ion-icon slot="icon-only" name="apps"></ion-icon>
+        <ion-icon slot="icon-only" name="time"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid padding-none>
-    <ion-row>
+  <ion-grid style="height: 60%" padding-none>
+    <ion-row justify-content-center align-items-center style="height: 100%">
       <ion-col padding-none size-sm="4" offset-sm="4">
-        <ion-card margin-none>
-          <ion-card-header>
-            <ion-card-subtitle>Active Event Group</ion-card-subtitle>
-            <ion-card-title>{{ activeEventGroup?.title }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-header *ngIf="currentEvent">
-            <ion-card-subtitle>Current Event</ion-card-subtitle>
-            <ion-card-title>{{ currentEvent?.title }}</ion-card-title>
-          </ion-card-header>
+        <ion-card style="vertical-align: middle" margin-none>
           <ion-card-content>
-            <ion-label>
-              <p>
-                Time: {{ time }}
-              </p>
+            <ion-label text-center>
+              <h2>{{ activeEventGroup?.title }} </h2>
+              <h2>{{ currentEvent?.title }}</h2>
             </ion-label>
-          </ion-card-content>
+          </ion-card-content >
+          <ion-card-header text-center>
+            <ion-card-title>{{ time }}</ion-card-title>
+          </ion-card-header>
+
         </ion-card>
 
       </ion-col>

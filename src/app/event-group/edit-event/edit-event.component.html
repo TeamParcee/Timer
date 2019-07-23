@@ -11,7 +11,7 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size-sm="4" offset-sm="4">
+      <ion-col>
         <ion-item>
           <ion-label>
             <h2>Title</h2>
@@ -30,8 +30,8 @@
           </ion-label>
           <ion-input type="number" name="duration" [(ngModel)]="event.duration"></ion-input>
         </ion-item>
-        <ion-button [disabled]="!event.title || !event.duration || !event.order" padding margin-top (click)="save()">Save</ion-button>
-        <ion-button color="danger" padding margin-top (click)="deleteEvent()">Delete Event</ion-button>
+        <ion-button expand="block" [disabled]="!event.title || !event.duration || !event.order" padding margin-top (click)="save()">Save</ion-button>
+        <ion-button expand="block" color="danger" padding margin-top (click)="deleteEvent()">Delete Event</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

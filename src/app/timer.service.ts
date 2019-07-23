@@ -32,15 +32,12 @@ export class TimerService {
 
 
 
-  startCountDownTimer(durations) {
-
+  startCountDownTimer(event: Event) {
     
-    return new Promise((resolve) => {
-      if (!this.timerRunning) {
-        this.timer.start({ countdown: true, startValues: { minutes: duration } });
+        console.log("starting Timer " + event.title)
+        this.timer.start({ countdown: true, startValues: { minutes: event.duration } });
         this.timerRunning = true;
-      }
-    })
+        this.waitForTimerToEnd(event);
 
 
 
@@ -48,14 +45,15 @@ export class TimerService {
 
 
 
-  waitForTimerToEnd(duration) {
+  waitForTimerToEnd(event) {
 
-    this.timer.addEventListener('targetAchieved', this.timerEnded);
+    this.timer.addEventListener('targetAchieved', this.timerEnded(event));
 
   }
 
-  timerEnded() {
+  timerEnded(event) {
     this.timerRunning = false;
+    this.componentService.showOkAlert(event.title + " starting", event.title + " has started.")
   }
 
   isTimerRunning() {

@@ -22,8 +22,11 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     this.activeEventGroup = (this.eventService.activeEventGroup) ? this.eventService.activeEventGroup : this.dummyEventGroup;
+   
+    console.log(this.currentEvent);
     this.timeService.getTime().subscribe((result)=>{
-      this.time = result
+      this.time = result;
+      this.currentEvent = (this.eventService.activeEvent) ? this.eventService.activeEvent : null;
     })
   }
 
@@ -36,7 +39,6 @@ export class HomePage implements OnInit {
     title: "No Active Event Group",
     events: []
   }
-
 
 
   // getCurrentEvent(){

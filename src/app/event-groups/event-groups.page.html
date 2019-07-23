@@ -18,7 +18,6 @@
   <ion-grid>
     <ion-row>
       <ion-col size-sm="4" offset-sm="4">
-        <ion-button href="/home">Refresh</ion-button>
         <ion-list *ngIf="eventList">
           <ion-item lines="none">
             <ion-label>
@@ -34,10 +33,9 @@
 
           <ion-item *ngFor="let eventGroup of eventList.eventsGroups">
             <ion-label [routerLink]="['/event-group', eventGroup.id]">
-              <h2> {{ eventGroup.title }}</h2>
-              <p> {{ eventGroup.events.length }}</p>
+              <h2> {{ eventGroup.title }} ({{ eventGroup.events.length }})</h2>
             </ion-label>
-            <ion-button [disabled]="eventGroup.events.length == 0" slot="end" (click)="activate(eventGroup)">Start</ion-button>
+            <ion-button fill="clear" [disabled]="eventGroup.events.length == 0" slot="end" (click)="activate(eventGroup)">Start</ion-button>
           </ion-item>
 
         </ion-list>
